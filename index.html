@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Jyothsna Ratnakaram - Data Analyst Portfolio">
     <title>Jyothsna Ratnakaram | Data Analyst</title>
+    <!-- Chart.js for interactive dashboards -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         * {
             margin: 0;
@@ -200,6 +202,127 @@
             font-weight: 700;
         }
 
+        /* Dashboard Styles */
+        .dashboard-container {
+            background: var(--black-card);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 3rem;
+            box-shadow: 0 8px 25px rgba(150, 123, 182, 0.3);
+            border: 1px solid var(--lavender-primary);
+        }
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--lavender-primary);
+        }
+
+        .dashboard-header h3 {
+            color: var(--lavender-secondary);
+            font-size: 1.5rem;
+        }
+
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .kpi-card {
+            background: linear-gradient(135deg, var(--black-secondary) 0%, rgba(150, 123, 182, 0.2) 100%);
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid var(--lavender-primary);
+            transition: transform 0.3s;
+        }
+
+        .kpi-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .kpi-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--lavender-accent);
+            margin: 0.5rem 0;
+        }
+
+        .kpi-label {
+            color: var(--lavender-light);
+            font-size: 0.9rem;
+        }
+
+        .chart-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .chart-container {
+            background: var(--black-secondary);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 1px solid var(--lavender-primary);
+            height: 300px;
+        }
+
+        .chart-title {
+            color: var(--lavender-secondary);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            text-align: center;
+        }
+
+        .dashboard-controls {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .control-group {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .control-group label {
+            color: var(--lavender-light);
+        }
+
+        .control-group select,
+        .control-group input {
+            background: var(--black-secondary);
+            color: var(--lavender-light);
+            border: 1px solid var(--lavender-primary);
+            padding: 0.5rem;
+            border-radius: 5px;
+            min-width: 150px;
+        }
+
+        .control-btn {
+            background: var(--lavender-primary);
+            color: var(--black-primary);
+            border: none;
+            padding: 0.5rem 1.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .control-btn:hover {
+            background: var(--lavender-accent);
+        }
+
+        /* About Section Styles */
         .about-content {
             display: grid;
             grid-template-columns: 1fr 2fr;
@@ -626,6 +749,18 @@
             .experience-timeline {
                 padding-left: 1.5rem;
             }
+
+            .chart-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .kpi-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .dashboard-controls {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
@@ -640,6 +775,7 @@
                 <li><a href="#experience">Experience</a></li>
                 <li><a href="#skills">Skills</a></li>
                 <li><a href="#projects">Projects</a></li>
+                <li><a href="#dashboards">Dashboards</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </div>
@@ -910,6 +1046,222 @@
         </div>
     </section>
 
+    <section id="dashboards">
+        <h2>Interactive Analytics Dashboards</h2>
+        
+        <!-- Logistics Analytics Dashboard -->
+        <div class="dashboard-container" id="logistics-dashboard">
+            <div class="dashboard-header">
+                <h3>🚚 Logistics Analytics Dashboard</h3>
+                <div class="dashboard-controls">
+                    <div class="control-group">
+                        <label for="logistics-time">Time Period:</label>
+                        <select id="logistics-time" onchange="updateLogisticsDashboard()">
+                            <option value="weekly">Weekly</option>
+                            <option value="monthly" selected>Monthly</option>
+                            <option value="quarterly">Quarterly</option>
+                        </select>
+                    </div>
+                    <div class="control-group">
+                        <label for="logistics-region">Region:</label>
+                        <select id="logistics-region" onchange="updateLogisticsDashboard()">
+                            <option value="all">All Regions</option>
+                            <option value="north">North</option>
+                            <option value="south">South</option>
+                            <option value="east">East</option>
+                            <option value="west">West</option>
+                        </select>
+                    </div>
+                    <button class="control-btn" onclick="resetLogisticsFilters()">Reset Filters</button>
+                </div>
+            </div>
+            
+            <div class="kpi-grid">
+                <div class="kpi-card">
+                    <div class="kpi-label">On-Time Delivery Rate</div>
+                    <div class="kpi-value" id="delivery-rate">94.2%</div>
+                    <div class="kpi-trend">↑ 2.1%</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">Avg Delivery Time</div>
+                    <div class="kpi-value" id="delivery-time">2.4h</div>
+                    <div class="kpi-trend">↓ 0.3h</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">Route Efficiency</div>
+                    <div class="kpi-value" id="route-efficiency">87.5%</div>
+                    <div class="kpi-trend">↑ 3.2%</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">Fuel Cost Saving</div>
+                    <div class="kpi-value" id="fuel-saving">$12.4K</div>
+                    <div class="kpi-trend">↑ $2.1K</div>
+                </div>
+            </div>
+            
+            <div class="chart-grid">
+                <div class="chart-container">
+                    <div class="chart-title">Delivery Performance Trend</div>
+                    <canvas id="logisticsChart1"></canvas>
+                </div>
+                <div class="chart-container">
+                    <div class="chart-title">Route Optimization Analysis</div>
+                    <canvas id="logisticsChart2"></canvas>
+                </div>
+                <div class="chart-container">
+                    <div class="chart-title">Delivery Time Distribution</div>
+                    <canvas id="logisticsChart3"></canvas>
+                </div>
+                <div class="chart-container">
+                    <div class="chart-title">Regional Performance</div>
+                    <canvas id="logisticsChart4"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Healthcare Analytics Dashboard -->
+        <div class="dashboard-container" id="healthcare-dashboard">
+            <div class="dashboard-header">
+                <h3>🏥 Healthcare Analytics Dashboard</h3>
+                <div class="dashboard-controls">
+                    <div class="control-group">
+                        <label for="healthcare-department">Department:</label>
+                        <select id="healthcare-department" onchange="updateHealthcareDashboard()">
+                            <option value="all">All Departments</option>
+                            <option value="emergency">Emergency</option>
+                            <option value="surgery">Surgery</option>
+                            <option value="cardiology">Cardiology</option>
+                            <option value="oncology">Oncology</option>
+                        </select>
+                    </div>
+                    <div class="control-group">
+                        <label for="healthcare-metric">Primary Metric:</label>
+                        <select id="healthcare-metric" onchange="updateHealthcareDashboard()">
+                            <option value="patients">Patient Metrics</option>
+                            <option value="treatment">Treatment Outcomes</option>
+                            <option value="resource">Resource Utilization</option>
+                        </select>
+                    </div>
+                    <button class="control-btn" onclick="resetHealthcareFilters()">Reset Filters</button>
+                </div>
+            </div>
+            
+            <div class="kpi-grid">
+                <div class="kpi-card">
+                    <div class="kpi-label">Patient Satisfaction</div>
+                    <div class="kpi-value" id="patient-satisfaction">92.4%</div>
+                    <div class="kpi-trend">↑ 4.2%</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">Avg Treatment Time</div>
+                    <div class="kpi-value" id="treatment-time">3.2h</div>
+                    <div class="kpi-trend">↓ 0.8h</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">Readmission Rate</div>
+                    <div class="kpi-value" id="readmission-rate">8.7%</div>
+                    <div class="kpi-trend">↓ 1.3%</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">Resource Utilization</div>
+                    <div class="kpi-value" id="resource-util">84.2%</div>
+                    <div class="kpi-trend">↑ 5.6%</div>
+                </div>
+            </div>
+            
+            <div class="chart-grid">
+                <div class="chart-container">
+                    <div class="chart-title">Patient Admissions Trend</div>
+                    <canvas id="healthcareChart1"></canvas>
+                </div>
+                <div class="chart-container">
+                    <div class="chart-title">Treatment Outcomes</div>
+                    <canvas id="healthcareChart2"></canvas>
+                </div>
+                <div class="chart-container">
+                    <div class="chart-title">Resource Allocation</div>
+                    <canvas id="healthcareChart3"></canvas>
+                </div>
+                <div class="chart-container">
+                    <div class="chart-title">Department Performance</div>
+                    <canvas id="healthcareChart4"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Marketing Analytics Dashboard -->
+        <div class="dashboard-container" id="marketing-dashboard">
+            <div class="dashboard-header">
+                <h3>📈 Marketing & Ad Analytics Dashboard</h3>
+                <div class="dashboard-controls">
+                    <div class="control-group">
+                        <label for="marketing-campaign">Campaign:</label>
+                        <select id="marketing-campaign" onchange="updateMarketingDashboard()">
+                            <option value="all">All Campaigns</option>
+                            <option value="q1">Q1 Campaign</option>
+                            <option value="q2">Q2 Campaign</option>
+                            <option value="summer">Summer Sale</option>
+                            <option value="holiday">Holiday Special</option>
+                        </select>
+                    </div>
+                    <div class="control-group">
+                        <label for="marketing-channel">Channel:</label>
+                        <select id="marketing-channel" onchange="updateMarketingDashboard()">
+                            <option value="all">All Channels</option>
+                            <option value="social">Social Media</option>
+                            <option value="email">Email</option>
+                            <option value="search">Search Ads</option>
+                            <option value="display">Display Ads</option>
+                        </select>
+                    </div>
+                    <button class="control-btn" onclick="resetMarketingFilters()">Reset Filters</button>
+                </div>
+            </div>
+            
+            <div class="kpi-grid">
+                <div class="kpi-card">
+                    <div class="kpi-label">ROI</div>
+                    <div class="kpi-value" id="roi-value">42.8%</div>
+                    <div class="kpi-trend">↑ 8.4%</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">Conversion Rate</div>
+                    <div class="kpi-value" id="conversion-value">3.8%</div>
+                    <div class="kpi-trend">↑ 0.9%</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">Customer Acquisition</div>
+                    <div class="kpi-value" id="acquisition-cost">$24.50</div>
+                    <div class="kpi-trend">↓ $3.20</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">Engagement Rate</div>
+                    <div class="kpi-value" id="engagement-rate">18.2%</div>
+                    <div class="kpi-trend">↑ 2.7%</div>
+                </div>
+            </div>
+            
+            <div class="chart-grid">
+                <div class="chart-container">
+                    <div class="chart-title">Campaign Performance</div>
+                    <canvas id="marketingChart1"></canvas>
+                </div>
+                <div class="chart-container">
+                    <div class="chart-title">Channel Effectiveness</div>
+                    <canvas id="marketingChart2"></canvas>
+                </div>
+                <div class="chart-container">
+                    <div class="chart-title">Customer Journey</div>
+                    <canvas id="marketingChart3"></canvas>
+                </div>
+                <div class="chart-container">
+                    <div class="chart-title">ROI by Campaign</div>
+                    <canvas id="marketingChart4"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section id="contact">
         <h2>Get In Touch</h2>
         <div class="contact-content">
@@ -948,6 +1300,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script>
     
     <script>
+        // Initialize Typed.js
         const typed = new Typed('#typed-text', {
             strings: [
                 'Data Analyst', 
@@ -963,6 +1316,7 @@
             loop: true
         });
 
+        // Navigation functions
         function toggleMenu() {
             const menu = document.getElementById('nav-menu');
             menu.classList.toggle('active');
@@ -988,6 +1342,7 @@
             e.target.reset();
         }
 
+        // Scroll animations
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -100px 0px'
@@ -1007,6 +1362,601 @@
             section.style.transform = 'translateY(20px)';
             section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
             observer.observe(section);
+        });
+
+        // Dashboard Data and Functions
+        const lavenderColor = '#967bb6';
+        const lavenderLight = '#b19cd9';
+        const lavenderAccent = '#c8a2c8';
+
+        // Logistics Dashboard
+        let logisticsCharts = [];
+
+        function initLogisticsDashboard() {
+            // Chart 1: Delivery Performance Trend
+            const ctx1 = document.getElementById('logisticsChart1').getContext('2d');
+            const chart1 = new Chart(ctx1, {
+                type: 'line',
+                data: {
+                    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                    datasets: [{
+                        label: 'On-Time Deliveries',
+                        data: [92, 94, 93, 95, 96, 94, 95],
+                        borderColor: lavenderColor,
+                        backgroundColor: 'rgba(150, 123, 182, 0.1)',
+                        borderWidth: 3,
+                        fill: true,
+                        tension: 0.4
+                    }, {
+                        label: 'Target',
+                        data: [95, 95, 95, 95, 95, 95, 95],
+                        borderColor: '#4CAF50',
+                        borderWidth: 2,
+                        borderDash: [5, 5],
+                        fill: false
+                    }]
+                },
+                options: getChartOptions('Delivery Performance (%)')
+            });
+
+            // Chart 2: Route Optimization Analysis
+            const ctx2 = document.getElementById('logisticsChart2').getContext('2d');
+            const chart2 = new Chart(ctx2, {
+                type: 'bar',
+                data: {
+                    labels: ['Route A', 'Route B', 'Route C', 'Route D', 'Route E'],
+                    datasets: [{
+                        label: 'Optimization Score',
+                        data: [85, 92, 78, 95, 88],
+                        backgroundColor: [
+                            lavenderColor,
+                            lavenderLight,
+                            lavenderColor,
+                            lavenderLight,
+                            lavenderColor
+                        ],
+                        borderColor: '#000',
+                        borderWidth: 1
+                    }]
+                },
+                options: getChartOptions('Optimization Score (%)')
+            });
+
+            // Chart 3: Delivery Time Distribution
+            const ctx3 = document.getElementById('logisticsChart3').getContext('2d');
+            const chart3 = new Chart(ctx3, {
+                type: 'doughnut',
+                data: {
+                    labels: ['<2h', '2-4h', '4-6h', '>6h'],
+                    datasets: [{
+                        data: [45, 35, 15, 5],
+                        backgroundColor: [
+                            lavenderColor,
+                            lavenderLight,
+                            lavenderAccent,
+                            '#8a7bb8'
+                        ],
+                        borderColor: '#000',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: '#e6e6fa'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Chart 4: Regional Performance
+            const ctx4 = document.getElementById('logisticsChart4').getContext('2d');
+            const chart4 = new Chart(ctx4, {
+                type: 'radar',
+                data: {
+                    labels: ['On-Time', 'Cost', 'Efficiency', 'Safety', 'Customer Sat'],
+                    datasets: [{
+                        label: 'North Region',
+                        data: [92, 88, 85, 95, 90],
+                        backgroundColor: 'rgba(150, 123, 182, 0.2)',
+                        borderColor: lavenderColor,
+                        borderWidth: 2
+                    }, {
+                        label: 'South Region',
+                        data: [88, 92, 90, 88, 85],
+                        backgroundColor: 'rgba(177, 156, 217, 0.2)',
+                        borderColor: lavenderLight,
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    scales: {
+                        r: {
+                            angleLines: {
+                                color: '#333'
+                            },
+                            grid: {
+                                color: '#333'
+                            },
+                            pointLabels: {
+                                color: '#e6e6fa'
+                            },
+                            ticks: {
+                                color: '#e6e6fa',
+                                backdropColor: '#000'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: '#e6e6fa'
+                            }
+                        }
+                    }
+                }
+            });
+
+            logisticsCharts = [chart1, chart2, chart3, chart4];
+        }
+
+        function updateLogisticsDashboard() {
+            const timePeriod = document.getElementById('logistics-time').value;
+            const region = document.getElementById('logistics-region').value;
+            
+            // Update KPIs based on filters
+            const kpis = {
+                'weekly': { rate: '94.2%', time: '2.4h', efficiency: '87.5%', saving: '$12.4K' },
+                'monthly': { rate: '93.8%', time: '2.5h', efficiency: '85.2%', saving: '$48.2K' },
+                'quarterly': { rate: '92.1%', time: '2.7h', efficiency: '83.4%', saving: '$142.7K' }
+            };
+            
+            const selectedKPI = kpis[timePeriod] || kpis.monthly;
+            
+            document.getElementById('delivery-rate').textContent = selectedKPI.rate;
+            document.getElementById('delivery-time').textContent = selectedKPI.time;
+            document.getElementById('route-efficiency').textContent = selectedKPI.efficiency;
+            document.getElementById('fuel-saving').textContent = selectedKPI.saving;
+            
+            // Update charts with new data based on filters
+            // In a real application, you would fetch new data here
+            console.log(`Updating logistics dashboard with ${timePeriod} period and ${region} region`);
+        }
+
+        function resetLogisticsFilters() {
+            document.getElementById('logistics-time').value = 'monthly';
+            document.getElementById('logistics-region').value = 'all';
+            updateLogisticsDashboard();
+        }
+
+        // Healthcare Dashboard
+        let healthcareCharts = [];
+
+        function initHealthcareDashboard() {
+            // Chart 1: Patient Admissions Trend
+            const ctx1 = document.getElementById('healthcareChart1').getContext('2d');
+            const chart1 = new Chart(ctx1, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                    datasets: [{
+                        label: 'Emergency',
+                        data: [120, 135, 142, 130, 145, 155],
+                        borderColor: lavenderColor,
+                        borderWidth: 3,
+                        fill: false,
+                        tension: 0.4
+                    }, {
+                        label: 'Surgery',
+                        data: [85, 92, 88, 95, 102, 98],
+                        borderColor: lavenderLight,
+                        borderWidth: 3,
+                        fill: false,
+                        tension: 0.4
+                    }, {
+                        label: 'Cardiology',
+                        data: [65, 72, 68, 75, 82, 78],
+                        borderColor: lavenderAccent,
+                        borderWidth: 3,
+                        fill: false,
+                        tension: 0.4
+                    }]
+                },
+                options: getChartOptions('Number of Patients')
+            });
+
+            // Chart 2: Treatment Outcomes
+            const ctx2 = document.getElementById('healthcareChart2').getContext('2d');
+            const chart2 = new Chart(ctx2, {
+                type: 'bar',
+                data: {
+                    labels: ['Excellent', 'Good', 'Fair', 'Poor'],
+                    datasets: [{
+                        label: 'Treatment Outcomes',
+                        data: [45, 35, 15, 5],
+                        backgroundColor: [
+                            lavenderColor,
+                            lavenderLight,
+                            lavenderAccent,
+                            '#8a7bb8'
+                        ],
+                        borderColor: '#000',
+                        borderWidth: 1
+                    }]
+                },
+                options: getChartOptions('Percentage (%)')
+            });
+
+            // Chart 3: Resource Allocation
+            const ctx3 = document.getElementById('healthcareChart3').getContext('2d');
+            const chart3 = new Chart(ctx3, {
+                type: 'pie',
+                data: {
+                    labels: ['Doctors', 'Nurses', 'Equipment', 'Medication', 'Facilities'],
+                    datasets: [{
+                        data: [35, 25, 20, 15, 5],
+                        backgroundColor: [
+                            lavenderColor,
+                            lavenderLight,
+                            lavenderAccent,
+                            '#8a7bb8',
+                            '#a890d0'
+                        ],
+                        borderColor: '#000',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: '#e6e6fa'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Chart 4: Department Performance
+            const ctx4 = document.getElementById('healthcareChart4').getContext('2d');
+            const chart4 = new Chart(ctx4, {
+                type: 'polarArea',
+                data: {
+                    labels: ['Emergency', 'Surgery', 'Cardiology', 'Oncology', 'Pediatrics'],
+                    datasets: [{
+                        data: [85, 92, 88, 95, 82],
+                        backgroundColor: [
+                            'rgba(150, 123, 182, 0.7)',
+                            'rgba(177, 156, 217, 0.7)',
+                            'rgba(200, 162, 200, 0.7)',
+                            'rgba(136, 123, 184, 0.7)',
+                            'rgba(168, 144, 208, 0.7)'
+                        ],
+                        borderColor: '#000',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        r: {
+                            grid: {
+                                color: '#333'
+                            },
+                            ticks: {
+                                color: '#e6e6fa',
+                                backdropColor: '#000'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: '#e6e6fa'
+                            }
+                        }
+                    }
+                }
+            });
+
+            healthcareCharts = [chart1, chart2, chart3, chart4];
+        }
+
+        function updateHealthcareDashboard() {
+            const department = document.getElementById('healthcare-department').value;
+            const metric = document.getElementById('healthcare-metric').value;
+            
+            // Update KPIs based on filters
+            const kpis = {
+                'all': { satisfaction: '92.4%', time: '3.2h', readmission: '8.7%', resource: '84.2%' },
+                'emergency': { satisfaction: '94.2%', time: '1.8h', readmission: '6.5%', resource: '92.1%' },
+                'surgery': { satisfaction: '91.8%', time: '4.5h', readmission: '9.2%', resource: '78.4%' }
+            };
+            
+            const selectedKPI = kpis[department] || kpis.all;
+            
+            document.getElementById('patient-satisfaction').textContent = selectedKPI.satisfaction;
+            document.getElementById('treatment-time').textContent = selectedKPI.time;
+            document.getElementById('readmission-rate').textContent = selectedKPI.readmission;
+            document.getElementById('resource-util').textContent = selectedKPI.resource;
+            
+            console.log(`Updating healthcare dashboard for ${department} department with ${metric} metrics`);
+        }
+
+        function resetHealthcareFilters() {
+            document.getElementById('healthcare-department').value = 'all';
+            document.getElementById('healthcare-metric').value = 'patients';
+            updateHealthcareDashboard();
+        }
+
+        // Marketing Dashboard
+        let marketingCharts = [];
+
+        function initMarketingDashboard() {
+            // Chart 1: Campaign Performance
+            const ctx1 = document.getElementById('marketingChart1').getContext('2d');
+            const chart1 = new Chart(ctx1, {
+                type: 'line',
+                data: {
+                    labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6'],
+                    datasets: [{
+                        label: 'ROI',
+                        data: [35, 38, 42, 45, 43, 48],
+                        borderColor: lavenderColor,
+                        borderWidth: 3,
+                        fill: false,
+                        tension: 0.4,
+                        yAxisID: 'y'
+                    }, {
+                        label: 'Conversion Rate',
+                        data: [2.8, 3.1, 3.5, 3.8, 3.6, 4.0],
+                        borderColor: lavenderLight,
+                        borderWidth: 3,
+                        fill: false,
+                        tension: 0.4,
+                        yAxisID: 'y1'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    interaction: {
+                        mode: 'index',
+                        intersect: false,
+                    },
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: '#e6e6fa'
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: {
+                                color: '#333'
+                            },
+                            ticks: {
+                                color: '#e6e6fa'
+                            }
+                        },
+                        y: {
+                            type: 'linear',
+                            display: true,
+                            position: 'left',
+                            title: {
+                                display: true,
+                                text: 'ROI (%)',
+                                color: lavenderColor
+                            },
+                            grid: {
+                                color: '#333'
+                            },
+                            ticks: {
+                                color: '#e6e6fa'
+                            }
+                        },
+                        y1: {
+                            type: 'linear',
+                            display: true,
+                            position: 'right',
+                            title: {
+                                display: true,
+                                text: 'Conversion Rate (%)',
+                                color: lavenderLight
+                            },
+                            grid: {
+                                drawOnChartArea: false,
+                            },
+                            ticks: {
+                                color: '#e6e6fa'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Chart 2: Channel Effectiveness
+            const ctx2 = document.getElementById('marketingChart2').getContext('2d');
+            const chart2 = new Chart(ctx2, {
+                type: 'bar',
+                data: {
+                    labels: ['Social', 'Email', 'Search', 'Display', 'Affiliate'],
+                    datasets: [{
+                        label: 'Effectiveness Score',
+                        data: [85, 72, 95, 68, 78],
+                        backgroundColor: [
+                            lavenderColor,
+                            lavenderLight,
+                            lavenderColor,
+                            lavenderLight,
+                            lavenderColor
+                        ],
+                        borderColor: '#000',
+                        borderWidth: 1
+                    }]
+                },
+                options: getChartOptions('Effectiveness Score')
+            });
+
+            // Chart 3: Customer Journey
+            const ctx3 = document.getElementById('marketingChart3').getContext('2d');
+            const chart3 = new Chart(ctx3, {
+                type: 'line',
+                data: {
+                    labels: ['Awareness', 'Consideration', 'Conversion', 'Retention', 'Advocacy'],
+                    datasets: [{
+                        label: 'Customer Journey',
+                        data: [10000, 4500, 1200, 850, 420],
+                        borderColor: lavenderColor,
+                        backgroundColor: 'rgba(150, 123, 182, 0.1)',
+                        borderWidth: 3,
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: getChartOptions('Number of Customers')
+            });
+
+            // Chart 4: ROI by Campaign
+            const ctx4 = document.getElementById('marketingChart4').getContext('2d');
+            const chart4 = new Chart(ctx4, {
+                type: 'scatter',
+                data: {
+                    datasets: [{
+                        label: 'Campaign ROI',
+                        data: [
+                            {x: 5000, y: 35},
+                            {x: 8000, y: 42},
+                            {x: 3000, y: 28},
+                            {x: 12000, y: 48},
+                            {x: 6000, y: 38},
+                            {x: 10000, y: 45}
+                        ],
+                        backgroundColor: lavenderColor,
+                        borderColor: '#000',
+                        borderWidth: 1,
+                        pointRadius: 8
+                    }]
+                },
+                options: {
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Ad Spend ($)',
+                                color: '#e6e6fa'
+                            },
+                            grid: {
+                                color: '#333'
+                            },
+                            ticks: {
+                                color: '#e6e6fa'
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'ROI (%)',
+                                color: '#e6e6fa'
+                            },
+                            grid: {
+                                color: '#333'
+                            },
+                            ticks: {
+                                color: '#e6e6fa'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: '#e6e6fa'
+                            }
+                        }
+                    }
+                }
+            });
+
+            marketingCharts = [chart1, chart2, chart3, chart4];
+        }
+
+        function updateMarketingDashboard() {
+            const campaign = document.getElementById('marketing-campaign').value;
+            const channel = document.getElementById('marketing-channel').value;
+            
+            // Update KPIs based on filters
+            const kpis = {
+                'all': { roi: '42.8%', conversion: '3.8%', acquisition: '$24.50', engagement: '18.2%' },
+                'q1': { roi: '38.5%', conversion: '3.2%', acquisition: '$28.40', engagement: '15.8%' },
+                'q2': { roi: '45.2%', conversion: '4.1%', acquisition: '$21.80', engagement: '19.5%' }
+            };
+            
+            const selectedKPI = kpis[campaign] || kpis.all;
+            
+            document.getElementById('roi-value').textContent = selectedKPI.roi;
+            document.getElementById('conversion-value').textContent = selectedKPI.conversion;
+            document.getElementById('acquisition-cost').textContent = selectedKPI.acquisition;
+            document.getElementById('engagement-rate').textContent = selectedKPI.engagement;
+            
+            console.log(`Updating marketing dashboard for ${campaign} campaign on ${channel} channel`);
+        }
+
+        function resetMarketingFilters() {
+            document.getElementById('marketing-campaign').value = 'all';
+            document.getElementById('marketing-channel').value = 'all';
+            updateMarketingDashboard();
+        }
+
+        // Helper function for chart options
+        function getChartOptions(yAxisLabel) {
+            return {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        labels: {
+                            color: '#e6e6fa'
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        grid: {
+                            color: '#333'
+                        },
+                        ticks: {
+                            color: '#e6e6fa'
+                        }
+                    },
+                    y: {
+                        grid: {
+                            color: '#333'
+                        },
+                        ticks: {
+                            color: '#e6e6fa'
+                        },
+                        title: {
+                            display: true,
+                            text: yAxisLabel,
+                            color: '#e6e6fa'
+                        }
+                    }
+                }
+            };
+        }
+
+        // Initialize all dashboards when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            initLogisticsDashboard();
+            initHealthcareDashboard();
+            initMarketingDashboard();
+            
+            // Initialize with default values
+            updateLogisticsDashboard();
+            updateHealthcareDashboard();
+            updateMarketingDashboard();
         });
     </script>
 </body>
