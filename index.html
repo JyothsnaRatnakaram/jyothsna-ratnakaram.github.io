@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Jyothsna Ratnakaram - Data Analyst Portfolio">
+    <title>Jyothsna Ratnakaram | Data Analyst</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #1e3a8a;
+            --secondary-color: #3b82f6;
+            --accent-color: #ef4444;
+            --text-color: #1f2937;
+            --bg-color: #f9fafb;
+            --white: #ffffff;
+            --gray: #6b7280;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+        }
+
+        /* Navigation */
+        nav {
+            background: var(--primary-color);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav .logo {
+            color: var(--white);
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: var(--white);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            color: var(--secondary-color);
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: var(--white);
+            padding: 120px 2rem 80px;
+            text-align: center;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .hero-content .typing {
+            font-size: 1.8rem;
+            color: #fbbf24;
+            min-height: 50px;
+            font-weight: 600;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin: 1.5rem 0 2rem;
+            opacity: 0.95;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-content .contact-info {
+            margin: 1rem 0 2rem;
+            font-size: 0.95rem;
+        }
+
+        .hero-content .contact-info a {
+            color: var(--white);
+            text-decoration: none;
+            margin: 0 1rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: var(--accent-color);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 5px;
+            transition: all 0.3s;
+            border: 2px solid var(--accent-color);
+            font-weight: 600;
+        }
+
+        .btn:hover {
+            background: transparent;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(239, 68, 68, 0.3);
+        }
+
+        /* Sections */
+        section {
+            padding: 80px 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .about-left {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .about-image {
+            width: 100%;
+            aspect-ratio: 1;
+            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .certification-badge {
+            background: var(--bg-color);
+            padding: 0.5rem 1rem;
+            margin: 0.5rem 0;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+            color: var(--gray);
+        }
+
+        .education-item {
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .education-item h4 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .education-item p {
+            color: var(--gray);
+            font-size: 0.95rem;
+        }
+
+        /* Skills Section */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-category {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .skill-category:hover {
+            transform: translateY(-5px);
+        }
+
+        .skill-category h3 {
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .skill-tag {
+            background: var(--bg-color);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: var(--text-color);
+            border: 1px solid #e5e7eb;
+        }
+
+        /* Experience Section */
+        .experience-timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .experience-timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: var(--secondary-color);
+        }
+
+        .experience-item {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        .experience-item::before {
+            content: '';
+            position: absolute;
+            left: -2.6rem;
+            top: 2rem;
+            width: 15px;
+            height: 15px;
+            background: var(--accent-color);
+            border-radius: 50%;
+            border: 3px solid var(--white);
+        }
+
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .experience-header h3 {
+            color: var(--primary-color);
+            font-size: 1.4rem;
+        }
+
+        .experience-header .company {
+            color: var(--gray);
+            font-size: 1.1rem;
+            margin: 0.3rem 0;
+        }
+
+        .experience-header .date {
+            color: var(--accent-color);
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .experience-item ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .experience-item li {
+            padding-left: 1.5rem;
+            margin-bottom: 0.8rem;
+            position: relative;
+            color: var(--gray);
+            line-height: 1.7;
+        }
+
+        .experience-item li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--secondary-color);
+            font-weight: bold;
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 3.5rem;
+        }
+
+        .project-content {
+            padding: 1.5rem;
+        }
+
+        .project-content h3 {
+            color: var(--primary-color);
+            margin-bottom: 0.8rem;
+            font-size: 1.3rem;
+        }
+
+        .project-content p {
+            color: var(--gray);
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .tech-badge {
+            background: var(--bg-color);
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            color: var(--secondary-color);
+            font-weight: 600;
+        }
+
+        /* Contact Section */
+        .contact-content {
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .contact-info-section {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .contact-info-section p {
+            margin: 0.5rem 0;
+            color: var(--gray);
+        }
+
+        .contact-info-section a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e5e7eb;
+            border-radius: 5px;
+            font-family: inherit;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary-color);
+            color: var(--white);
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--secondary-color);
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--primary-color);
+                padding: 1rem 0;
+            }
+
+            nav ul.active {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-content .typing {
+                font-size: 1.3rem;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            .experience-header {
+                flex-direction: column;
+            }
+
+            .experience-timeline {
+                padding-left: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <div class="logo">JR</div>
+            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+            <ul id="nav-menu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Jyothsna Ratnakaram</h1>
+            <div class="typing" id="typed-text"></div>
+            <p>Transforming data into actionable insights with Python, SQL, and Power BI</p>
+            <div class="contact-info">
+                <a href="mailto:jyothsnaratnakaram29@gmail.com">jyothsnaratnakaram29@gmail.com</a>
+                <span>•</span>
+                <a href="tel:8624105448">(862) 410-5448</a>
+                <span>•</span>
+                <span>Harrison, NJ</span>
+            </div>
+            <a href="#contact" class="btn">Get In Touch</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <h2>About Me</h2>
+        <div class="about-content">
+            <div class="about-left">
+                <div class="about-image">👩‍💻</div>
+                <h3 style="margin-bottom: 1rem; color: var(--primary-color);">Certifications</h3>
+                <div class="certification-badge">☁️ AWS Cloud Practitioner</div>
+                <div class="certification-badge">⚙️ AWS Data Engineer</div>
+                <div class="certification-badge">🔒 CompTIA Security+</div>
+                <div class="certification-badge">📊 Microsoft Power BI (PL-300)</div>
+            </div>
+            <div class="about-right">
+                <div class="about-text">
+                    <p>Data Analyst with expertise in Python, SQL, and Power BI for data cleaning, analysis, and visualization. Skilled in deriving actionable insights from large datasets to support business decisions. Experienced in building dashboards, performing statistical analysis, and communicating findings to stakeholders.</p>
+                    <p>I specialize in transforming complex datasets into clear, actionable insights that drive business strategy. My experience spans across healthcare, logistics, marketing analytics, and business intelligence, where I've consistently delivered value through data-driven decision making.</p>
+                </div>
+                
+                <h3 style="margin: 2rem 0 1rem; color: var(--primary-color);">Education</h3>
+                <div class="education-item">
+                    <h4>Master of Science in Computer Science</h4>
+                    <p>New Jersey Institute of Technology, Newark, NJ</p>
+                    <p style="color: var(--accent-color); font-weight: 600;">Jan 2023 - May 2025</p>
+                </div>
+                <div class="education-item">
+                    <h4>B.Tech in Computer Science & Engineering</h4>
+                    <p>B.V Raju Institute of Technology, Hyderabad, India</p>
+                    <p style="color: var(--accent-color); font-weight: 600;">Jan 2019 - Dec 2023</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience">
+        <h2>Work Experience</h2>
+        <div class="experience-timeline">
+            <div class="experience-item">
+                <div class="experience-header">
+                    <div>
+                        <h3>Data Analyst</h3>
+                        <p class="company">Havish Associates, Harrison, NJ</p>
+                    </div>
+                    <span class="date">Sep 2024 - Present</span>
+                </div>
+                <ul>
+                    <li>Collect, clean, and preprocess datasets (40K–80K+ records monthly) using Python (Pandas, NumPy) and SQL, ensuring 99% reporting reliability</li>
+                    <li>Build and optimize ETL workflows, reducing data preparation and reporting time by 30–40% through automation and reusable transformation scripts</li>
+                    <li>Develop interactive Power BI dashboards to track KPIs, revenue trends, client performance, and operational metrics, supporting leadership decisions</li>
+                    <li>Perform data modeling (Star/Snowflake schema) to design analytical data layers, improving insight accessibility for business and finance teams</li>
+                    <li>Conduct trend analysis and forecasting (client demand, workload efficiency, seasonal performance) to assist planning cycles</li>
+                    <li>Generate weekly and monthly analytical reports with actionable insights, improving business outcome accuracy by ~20%</li>
+                    <li>Collaborate with stakeholders to convert business problems into structured data requirements and visualization plans</li>
+                    <li>Implement data validation checks and anomaly detection to ensure data consistency across source systems</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <div class="experience-header">
+                    <div>
+                        <h3>Data Analyst Intern</h3>
+                        <p class="company">NJII, Newark, NJ</p>
+                    </div>
+                    <span class="date">Sep 2024 - Dec 2024</span>
+                </div>
+                <ul>
+                    <li>Cleaned and validated large datasets using Python and SQL, boosting data accuracy by over 30%</li>
+                    <li>Analyzed sales trends and customer engagement, enhancing campaign effectiveness and retention by 8%</li>
+                    <li>Designed Power BI dashboards, reducing manual reporting time and aiding executive decisions</li>
+                    <li>Collaborated with teams to automate workflows, improving efficiency by around 25%</li>
+                    <li>Conducted data audits, supporting data governance to minimize discrepancies</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <div class="experience-header">
+                    <div>
+                        <h3>Data Analyst</h3>
+                        <p class="company">Victory Box Corporation, Palisades Park, NJ</p>
+                    </div>
+                    <span class="date">May 2024 - Aug 2024</span>
+                </div>
+                <ul>
+                    <li>Optimized ETL pipelines, reducing reporting time by 35% through automation and testing</li>
+                    <li>Analyzed QR scan data to enhance sales strategies, increasing engagement by 18%</li>
+                    <li>Collaborated with marketing to boost campaign ROI by 12% using data analysis</li>
+                    <li>Executed A/B testing with SQL, improving conversion rates by 10% via tailored content</li>
+                    <li>Validated data pipelines, reducing errors by over 25% and ensuring data accuracy</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <div class="experience-header">
+                    <div>
+                        <h3>Data Analyst</h3>
+                        <p class="company">Candid Brains, Hyderabad, India</p>
+                    </div>
+                    <span class="date">Oct 2022 - Mar 2023</span>
+                </div>
+                <ul>
+                    <li>Built cohesive sales data system, enhancing analysis precision and decision-making speed</li>
+                    <li>Analyzed sales trends, uncovering key revenue drivers and seasonal patterns</li>
+                    <li>Developed dashboards for real-time KPI visualization, aiding strategic decisions</li>
+                    <li>Collaborated with marketing to refine digital campaigns, boosting customer targeting</li>
+                    <li>Enhanced data accuracy for executive reports, ensuring reliable business insights</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <h2>Technical Skills</h2>
+        <div class="skills-container">
+            <div class="skill-category">
+                <h3>💻 Programming & Databases</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">SQL</span>
+                    <span class="skill-tag">Pandas</span>
+                    <span class="skill-tag">NumPy</span>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h3>📊 Data Visualization</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">Power BI</span>
+                    <span class="skill-tag">Excel</span>
+                    <span class="skill-tag">Matplotlib</span>
+                    <span class="skill-tag">Seaborn</span>
+                    <span class="skill-tag">Dashboard Development</span>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h3>🔧 Data Engineering</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">ETL Pipelines</span>
+                    <span class="skill-tag">Data Modeling</span>
+                    <span class="skill-tag">Data Warehousing</span>
+                    <span class="skill-tag">Star/Snowflake Schema</span>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h3>☁️ Cloud & Tools</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">AWS</span>
+                    <span class="skill-tag">Git</span>
+                    <span class="skill-tag">GitHub</span>
+                    <span class="skill-tag">Google Analytics</span>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h3>📈 Analytics</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">Data Analysis</span>
+                    <span class="skill-tag">Statistical Analysis</span>
+                    <span class="skill-tag">Data Cleaning</span>
+                    <span class="skill-tag">KPI Tracking</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <h2>Featured Projects</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="project-image">🚚</div>
+                <div class="project-content">
+                    <h3>Logistics Analytics Dashboard</h3>
+                    <p>Comprehensive Power BI dashboard tracking delivery performance, route optimization, and operational KPIs. Reduced reporting time by 40% and improved delivery efficiency through data-driven insights.</p>
+                    <div class="project-tech">
+                        <span class="tech-badge">Power BI</span>
+                        <span class="tech-badge">SQL</span>
+                        <span class="tech-badge">Python</span>
+                        <span class="tech-badge">ETL</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-image">🏥</div>
+                <div class="project-content">
+                    <h3>Healthcare Analytics Dashboard</h3>
+                    <p>Interactive dashboard analyzing patient data, treatment outcomes, and resource utilization. Enabled healthcare providers to make data-driven decisions for improved patient care and operational efficiency.</p>
+                    <div class="project-tech">
+                        <span class="tech-badge">Power BI</span>
+                        <span class="tech-badge">Data Modeling</span>
+                        <span class="tech-badge">SQL</span>
+                        <span class="tech-badge">Excel</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-image">📱</div>
+                <div class="project-content">
+                    <h3>Marketing & Ad Analytics Dashboard</h3>
+                    <p>Real-time marketing performance dashboard tracking campaign ROI, customer engagement, and conversion rates. Improved marketing efficiency by 12% through A/B testing and trend analysis.</p>
+                    <div class="project-tech">
+                        <span class="tech-badge">Power BI</span>
+                        <span class="tech-badge">Google Analytics</span>
+                        <span class="tech-badge">Python</span>
+                        <span class="tech-badge">A/B Testing</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-image">🤖</div>
+                <div class="project-content">
+                    <h3>Student Information Chatbot</h3>
+                    <p>Developed an interactive Q&A chatbot for Student Information System using Python and NLP libraries. Structured student query data and designed menu-driven interface with SQLite/Firebase backend.</p>
+                    <div class="project-tech">
+                        <span class="tech-badge">Python</span>
+                        <span class="tech-badge">NLP</span>
+                        <span class="tech-badge">SQLite</span>
+                        <span class="tech-badge">NLTK</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-image">🚦</div>
+                <div class="project-content">
+                    <h3>Smart Traffic Control using AI</h3>
+                    <p>AI-driven system optimizing traffic light control by analyzing real-time traffic data and predicting congestion patterns. Applied data preprocessing, feature extraction, and developed visualization dashboards.</p>
+                    <div class="project-tech">
+                        <span class="tech-badge">Python</span>
+                        <span class="tech-badge">Scikit-learn</span>
+                        <span class="tech-badge">Data Visualization</span>
+                        <span class="tech-badge">AI/ML</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-image">🔐</div>
+                <div class="project-content">
+                    <h3>Safe Passwords Application</h3>
+                    <p>Mobile application for secure password storage using SHA-based encryption. Structured and managed sensitive credential data with SQLite, implementing SHA-256/SHA-512 encryption standards.</p>
+                    <div class="project-tech">
+                        <span class="tech-badge">Mobile Dev</span>
+                        <span class="tech-badge">SQLite</span>
+                        <span class="tech-badge">Encryption</span>
+                        <span class="tech-badge">Security</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <h2>Get In Touch</h2>
+        <div class="contact-content">
+            <div class="contact-info-section">
+                <p><strong>Email:</strong> <a href="mailto:jyothsnaratnakaram29@gmail.com">jyothsnaratnakaram29@gmail.com</a></p>
+                <p><strong>Phone:</strong> <a href="tel:8624105448">(862) 410-5448</a></p>
+                <p><strong>Location:</strong> Harrison, NJ 07029</p>
+            </div>
+            <form onsubmit="handleSubmit(event)">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" required></textarea>
+                </div>
+                <button type="submit" class="btn">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Jyothsna Ratnakaram. All rights reserved.</p>
+        <div class="social-links">
+            <a href="https://github.com/yourusername" target="_blank">GitHub</a>
+            <a href="https://linkedin.com/in/yourusername" target="_blank">LinkedIn</a>
+            <a href="mailto:jyothsnaratnakaram29@gmail.com">Email</a>
+        </div>
+    </footer>
+
+    <!-- Typed.js CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script>
+    
+    <script>
+        // Typing Animation
+        const typed = new Typed('#typed-text', {
+            strings: [
+                'Data Analyst 📊', 
+                'Python Developer 🐍', 
+                'SQL Expert 💾', 
+                'Power BI Specialist 📈',
+                'Data Visualization Expert 📉',
+                'AWS Certified ☁️'
+            ],
+            typeSpeed: 50,
+            backSpeed: 30,
+            backDelay: 2000,
+            loop: true
+        });
+
+        // Mobile Menu Toggle
+        function toggleMenu() {
+            const menu = document.getElementById('nav-menu');
+            menu.classList.toggle('active');
+        }
+
+        // Smooth Scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    document.getElementById('nav-menu').classList.remove('active');
+                }
+            });
+        });
+
+        // Form Submission
+        function handleSubmit(e) {
+            e.preventDefault();
+            alert('Thank you for your message! I will get back to you soon.');
+            e.target.reset();
+        }
+
+        // Add scroll animation for sections
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(20px)';
+            section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
