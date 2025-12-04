@@ -322,6 +322,211 @@
             background: var(--lavender-accent);
         }
 
+        /* Chatbot Styles */
+        .chatbot-container {
+            background: var(--black-card);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 3rem;
+            box-shadow: 0 8px 25px rgba(150, 123, 182, 0.3);
+            border: 1px solid var(--lavender-primary);
+        }
+
+        .chatbot-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--lavender-primary);
+        }
+
+        .chatbot-header h3 {
+            color: var(--lavender-secondary);
+            font-size: 1.5rem;
+        }
+
+        .chatbot-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--lavender-light);
+        }
+
+        .chatbot-description {
+            color: var(--lavender-light);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+            text-align: center;
+        }
+
+        .chatbot-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .chat-window {
+            background: var(--black-secondary);
+            border-radius: 10px;
+            border: 1px solid var(--lavender-primary);
+            height: 400px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 1rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .chat-message {
+            max-width: 80%;
+            padding: 0.8rem 1rem;
+            border-radius: 15px;
+            line-height: 1.4;
+        }
+
+        .bot-message {
+            background: var(--lavender-primary);
+            color: var(--black-primary);
+            align-self: flex-start;
+            border-bottom-left-radius: 5px;
+        }
+
+        .user-message {
+            background: var(--lavender-light);
+            color: var(--black-primary);
+            align-self: flex-end;
+            border-bottom-right-radius: 5px;
+        }
+
+        .chat-input-area {
+            padding: 1rem;
+            border-top: 1px solid var(--lavender-primary);
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 0.8rem;
+            background: var(--black-primary);
+            border: 1px solid var(--lavender-primary);
+            border-radius: 5px;
+            color: var(--lavender-light);
+            font-family: inherit;
+        }
+
+        .chat-input:focus {
+            outline: none;
+            border-color: var(--lavender-accent);
+        }
+
+        .send-btn {
+            background: var(--lavender-primary);
+            color: var(--black-primary);
+            border: none;
+            padding: 0 1.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .send-btn:hover {
+            background: var(--lavender-accent);
+        }
+
+        .quick-questions {
+            background: var(--black-secondary);
+            border-radius: 10px;
+            padding: 1.5rem;
+            border: 1px solid var(--lavender-primary);
+        }
+
+        .quick-questions h4 {
+            color: var(--lavender-secondary);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .question-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .question-btn {
+            background: linear-gradient(135deg, var(--black-primary) 0%, rgba(150, 123, 182, 0.2) 100%);
+            color: var(--lavender-light);
+            border: 1px solid var(--lavender-primary);
+            padding: 0.8rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: left;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .question-btn:hover {
+            background: linear-gradient(135deg, var(--lavender-primary) 0%, var(--black-secondary) 100%);
+            transform: translateX(5px);
+        }
+
+        .chatbot-features {
+            margin-top: 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, var(--black-secondary) 0%, rgba(150, 123, 182, 0.2) 100%);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 1px solid var(--lavender-primary);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            color: var(--lavender-light);
+            font-size: 1.5rem;
+        }
+
+        .feature-card h4 {
+            color: var(--lavender-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-card p {
+            color: var(--lavender-light);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
         /* About Section Styles */
         .about-content {
             display: grid;
@@ -707,6 +912,10 @@
             .about-content {
                 grid-template-columns: 1fr;
             }
+            
+            .chatbot-content {
+                grid-template-columns: 1fr;
+            }
         }
 
         @media (max-width: 768px) {
@@ -776,6 +985,7 @@
                 <li><a href="#skills">Skills</a></li>
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="#dashboards">Dashboards</a></li>
+                <li><a href="#chatbot">Chatbot</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </div>
@@ -1052,7 +1262,7 @@
         <!-- Logistics Analytics Dashboard -->
         <div class="dashboard-container" id="logistics-dashboard">
             <div class="dashboard-header">
-                <h3> Logistics Analytics Dashboard</h3>
+                <h3>🚚 Logistics Analytics Dashboard</h3>
                 <div class="dashboard-controls">
                     <div class="control-group">
                         <label for="logistics-time">Time Period:</label>
@@ -1122,7 +1332,7 @@
         <!-- Healthcare Analytics Dashboard -->
         <div class="dashboard-container" id="healthcare-dashboard">
             <div class="dashboard-header">
-                <h3> Healthcare Analytics Dashboard</h3>
+                <h3>🏥 Healthcare Analytics Dashboard</h3>
                 <div class="dashboard-controls">
                     <div class="control-group">
                         <label for="healthcare-department">Department:</label>
@@ -1192,7 +1402,7 @@
         <!-- Marketing Analytics Dashboard -->
         <div class="dashboard-container" id="marketing-dashboard">
             <div class="dashboard-header">
-                <h3> Marketing & Ad Analytics Dashboard</h3>
+                <h3>📈 Marketing & Ad Analytics Dashboard</h3>
                 <div class="dashboard-controls">
                     <div class="control-group">
                         <label for="marketing-campaign">Campaign:</label>
@@ -1257,6 +1467,101 @@
                 <div class="chart-container">
                     <div class="chart-title">ROI by Campaign</div>
                     <canvas id="marketingChart4"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="chatbot">
+        <h2>Interactive Student Information Chatbot</h2>
+        
+        <div class="chatbot-container">
+            <div class="chatbot-header">
+                <div class="chatbot-icon">🤖</div>
+                <h3>Student Information Assistant</h3>
+            </div>
+            
+            <p class="chatbot-description">
+                This AI-powered chatbot helps students get instant answers about courses, schedules, grades, 
+                campus resources, and more. Built with Python, NLP, and SQLite database integration.
+            </p>
+            
+            <div class="chatbot-content">
+                <div class="chat-window">
+                    <div class="chat-messages" id="chatMessages">
+                        <!-- Messages will appear here -->
+                        <div class="chat-message bot-message">
+                            Hello! I'm your Student Information Assistant. How can I help you today?
+                        </div>
+                        <div class="chat-message bot-message">
+                            You can ask me about:
+                            <br>• Course schedules and availability
+                            <br>• Grade information and GPA calculation
+                            <br>• Campus resources and facilities
+                            <br>• Registration deadlines and procedures
+                            <br>• Academic calendar events
+                            <br>• Faculty contact information
+                        </div>
+                    </div>
+                    <div class="chat-input-area">
+                        <input type="text" class="chat-input" id="chatInput" 
+                               placeholder="Type your question here..." 
+                               onkeypress="handleChatInputKeypress(event)">
+                        <button class="send-btn" onclick="sendMessage()">Send</button>
+                    </div>
+                </div>
+                
+                <div class="quick-questions">
+                    <h4>Quick Questions</h4>
+                    <div class="question-buttons">
+                        <button class="question-btn" onclick="askQuestion('What courses are available for Computer Science majors?')">
+                            Available CS courses?
+                        </button>
+                        <button class="question-btn" onclick="askQuestion('When is the registration deadline for Fall 2024?')">
+                            Registration deadline?
+                        </button>
+                        <button class="question-btn" onclick="askQuestion('How do I check my grades?')">
+                            Check my grades
+                        </button>
+                        <button class="question-btn" onclick="askQuestion('What is the GPA calculation formula?')">
+                            GPA calculation
+                        </button>
+                        <button class="question-btn" onclick="askQuestion('Where is the library located?')">
+                            Library location
+                        </button>
+                        <button class="question-btn" onclick="askQuestion('How do I contact my advisor?')">
+                            Contact advisor
+                        </button>
+                        <button class="question-btn" onclick="askQuestion('What are the tuition fees for international students?')">
+                            Tuition fees
+                        </button>
+                        <button class="question-btn" onclick="askQuestion('Is there parking available on campus?')">
+                            Campus parking
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="chatbot-features">
+                <div class="feature-card">
+                    <div class="feature-icon">📚</div>
+                    <h4>Course Information</h4>
+                    <p>Get details about courses, prerequisites, schedules, and instructor information</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎓</div>
+                    <h4>Grade Tracking</h4>
+                    <p>Check grades, calculate GPA, and monitor academic progress in real-time</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📅</div>
+                    <h4>Schedule Management</h4>
+                    <p>View class schedules, exam dates, and academic calendar events</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🏫</div>
+                    <h4>Campus Resources</h4>
+                    <p>Find information about libraries, labs, dining halls, and student services</p>
                 </div>
             </div>
         </div>
@@ -1947,7 +2252,134 @@
             };
         }
 
-        // Initialize all dashboards when page loads
+        // Chatbot Functions
+        const chatbotResponses = {
+            // Course Information
+            'course': {
+                pattern: /course|class|schedule|subject|curriculum|major/gi,
+                responses: [
+                    "The Computer Science department offers courses in Data Structures, Algorithms, Database Systems, Machine Learning, and Web Development.",
+                    "For Spring 2024, CS courses include CS501 (Advanced Algorithms), CS502 (Database Management), and CS503 (Machine Learning Fundamentals).",
+                    "Course schedules are available on the student portal. Most CS courses are offered on Mondays and Wednesdays from 10 AM to 12 PM."
+                ]
+            },
+            'registration': {
+                pattern: /register|registration|deadline|enroll|add drop/gi,
+                responses: [
+                    "The registration deadline for Fall 2024 is August 15, 2024. Late registration with a fee is available until August 30.",
+                    "You can register for courses through the student portal under 'Course Registration' section.",
+                    "Add/drop period is during the first two weeks of each semester. No penalty during this period."
+                ]
+            },
+            'grade': {
+                pattern: /grade|gpa|score|mark|result|transcript/gi,
+                responses: [
+                    "Grades are typically posted within 72 hours after final exams. You can check them on the student portal.",
+                    "GPA is calculated on a 4.0 scale: A=4.0, B=3.0, C=2.0, D=1.0, F=0.0.",
+                    "To calculate your GPA, multiply each course grade points by credit hours, sum them, then divide by total credit hours."
+                ]
+            },
+            'advisor': {
+                pattern: /advisor|counselor|faculty|professor|contact/gi,
+                responses: [
+                    "Your academic advisor is Dr. Sarah Johnson. Her office is in the Computer Science building, room 302.",
+                    "You can schedule appointments with your advisor through the student portal or email at sjohnson@university.edu.",
+                    "Faculty office hours are posted on department websites and outside faculty offices."
+                ]
+            },
+            'library': {
+                pattern: /library|book|resource|study|lab/gi,
+                responses: [
+                    "The main library is open Monday-Friday 8 AM-10 PM, Saturday 9 AM-8 PM, and Sunday 10 AM-6 PM.",
+                    "The computer science lab in building A has 24/7 access for CS students with valid ID.",
+                    "You can access online journals and databases through the library website using your student credentials."
+                ]
+            },
+            'fee': {
+                pattern: /fee|tuition|payment|cost|financial/gi,
+                responses: [
+                    "Tuition for undergraduate students is $15,000 per semester for full-time enrollment.",
+                    "International students have an additional fee of $2,000 per semester for visa processing and services.",
+                    "Payment deadlines are typically two weeks before each semester begins. Installment plans are available."
+                ]
+            },
+            'parking': {
+                pattern: /parking|transport|commute|campus/gi,
+                responses: [
+                    "Student parking permits cost $200 per semester. Parking lots are located near each academic building.",
+                    "The campus shuttle runs every 15 minutes from 7 AM to 11 PM between major campus locations.",
+                    "Bicycle racks are available near all buildings. Bike registration is free at campus security."
+                ]
+            },
+            'default': {
+                pattern: /.*/,
+                responses: [
+                    "I'm not sure I understand. Could you rephrase your question?",
+                    "That's an interesting question! Could you provide more details?",
+                    "I'm still learning about that topic. Try asking about courses, grades, or campus resources.",
+                    "For specific inquiries, please contact the relevant department directly."
+                ]
+            }
+        };
+
+        function getBotResponse(userMessage) {
+            userMessage = userMessage.toLowerCase();
+            
+            // Check for matches in each response category
+            for (const category in chatbotResponses) {
+                if (category !== 'default') {
+                    if (chatbotResponses[category].pattern.test(userMessage)) {
+                        const responses = chatbotResponses[category].responses;
+                        return responses[Math.floor(Math.random() * responses.length)];
+                    }
+                }
+            }
+            
+            // Return default response if no match found
+            const defaultResponses = chatbotResponses.default.responses;
+            return defaultResponses[Math.floor(Math.random() * defaultResponses.length)];
+        }
+
+        function addMessage(message, isUser = false) {
+            const chatMessages = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `chat-message ${isUser ? 'user-message' : 'bot-message'}`;
+            messageDiv.textContent = message;
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+            
+            if (message) {
+                // Add user message
+                addMessage(message, true);
+                input.value = '';
+                
+                // Simulate typing delay
+                setTimeout(() => {
+                    // Get bot response
+                    const response = getBotResponse(message);
+                    addMessage(response, false);
+                }, 1000);
+            }
+        }
+
+        function askQuestion(question) {
+            const input = document.getElementById('chatInput');
+            input.value = question;
+            sendMessage();
+        }
+
+        function handleChatInputKeypress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
+        // Initialize all dashboards and chatbot when page loads
         document.addEventListener('DOMContentLoaded', function() {
             initLogisticsDashboard();
             initHealthcareDashboard();
@@ -1957,8 +2389,12 @@
             updateLogisticsDashboard();
             updateHealthcareDashboard();
             updateMarketingDashboard();
+            
+            // Add welcome message to chatbot
+            setTimeout(() => {
+                addMessage("Welcome to the Student Information System! I'm here to help you with academic queries.", false);
+            }, 500);
         });
     </script>
 </body>
 </html>
-
